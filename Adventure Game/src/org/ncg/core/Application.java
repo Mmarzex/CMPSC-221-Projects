@@ -1,5 +1,8 @@
 package org.ncg.core;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 /**
  * This is the root of the abilities of an Application.  Support for all
  * uses of this "application" framework are supported here.
@@ -150,6 +153,12 @@ public abstract class Application
 	protected void loadLocationsFromFileNamed(String fileName)
 	{
 		locations = (AdventureGameHashMap<Location>)loadObjectFromFileNamed(fileName);
+		
+		Item testItem = new Item("Hammer", "A SHINY HAMMER");
+		ArrayList<Item> testList = new ArrayList<>();
+		testList.add(testItem);
+		itemsInLocation.put(idForInitialLocation, testList);
+		
 	} /* end loadLocationsFromFileNamed */
 
    /**
@@ -270,6 +279,24 @@ public abstract class Application
 	   }
 	
 	/**
+	 * Lists the Items in the provided Location
+	 * @param location 
+	 * @return A String containing all the items in the provided location
+	 */
+	protected String listItemsInLocation(Location location) {
+		String itemsInLoc = "";
+		
+		
+		if(itemsInLocation.containsKey(location.id())) {
+			ArrayList<Item> items = itemsInLocation.get(location.id());
+			for(Item i : items) {
+				itemsInLoc += "You see a " + i.name() + ". ";
+			}
+		}
+		return itemsInLoc;
+	}
+	
+	/**
 	 * Tell the user where we are
 	 */
 	protected void look()
@@ -345,6 +372,22 @@ public abstract class Application
    public abstract void run();
 
    /**
+    * Adds an item to the list of items in the Application
+    * @param item
+    */
+   protected void addItem(Item item) {
+	   itemsInApplication.add(item);
+   }
+   
+   protected void saveItemsToFileNamed(String fileName) {
+	   saveObjectToFileNamed(itemsInApplication, fileName);
+   }
+   
+   protected void loadItemsFromFileNamed(String fileName) {
+	   itemsInApplication = (ArrayList<Item>)loadObjectFromFileNamed(fileName);
+   }
+   
+   /**
     * Save the current locations database to a file with the specified file
     * name
     * @param fileName - The name of the file where the locations are to be
@@ -386,7 +429,7 @@ public abstract class Application
 	} /* end saveObjectToFileNamed */
 
 	/** The id of the initial location */
-	private Integer idForInitialLocation = 0;
+	 private Integer idForInitialLocation = 0;
 	
    /** The Singleton instance */
    private static Application instance = null;
@@ -394,6 +437,12 @@ public abstract class Application
    /** The list of all locations */
    private static AdventureGameHashMap<Location> locations = new AdventureGameHashMap<>(); 
 
+   /** List of Items running in the game */
+   private static ArrayList<Item> itemsInApplication = new ArrayList<Item>();
+   
+   /** Hashmap of items in each location */
+   private static HashMap<Integer, ArrayList<Item>> itemsInLocation = new HashMap<Integer, ArrayList<Item>>();
+   
    /** The map of locations */
    private Map map = null;
    

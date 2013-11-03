@@ -1,33 +1,10 @@
-package org.ncg.core;
+	package org.ncg.core;
 
 /**
  * This class represents a player of the adventure game.
  */
-public class Player
+public class Player extends Entity
 {
-	/**
-	 * An accessor for the player's current location.  The location will be
-	 * lazy initialized if needed. 
-	 * @return - The player's current location.
-	 */
-	protected Location currentLocation()
-	{
-			// We use direct member access here so we don't get the side-effect of
-		// informing observers of the location change (since we're initializing
-		// it).
-		if (null == currentLocation) currentLocation = Application.instance().initialLocation();
-		return(currentLocation);
-	} /* end currentLocation */
-
-	/**
-	 * Move the player to the specified location
-	 * @param value - The new location where the player will be moved
-	 */
-	protected void currentLocation(Location value)
-	{
-		currentLocation = value;
-		informPlayerMovedObservers();
-	} /* end currentLocation */
 	
 	/**
 	 * Attempt to move the player to the east from their current location
@@ -38,6 +15,7 @@ public class Player
 		{
    		Location newLocation = Application.instance().determineLocationEastOf(currentLocation);
 	   	currentLocation(newLocation);
+		informPlayerMovedObservers();
 		}
 		catch (NoLocationInDirectionException e)
 		{
@@ -54,6 +32,7 @@ public class Player
 		{
    		Location newLocation = Application.instance().determineLocationNorthOf(currentLocation);
 	   	currentLocation(newLocation);
+		informPlayerMovedObservers();
 		}
 		catch (NoLocationInDirectionException e)
 		{
@@ -70,6 +49,7 @@ public class Player
 		{
    		Location newLocation = Application.instance().determineLocationSouthOf(currentLocation);
 	   	currentLocation(newLocation);
+		informPlayerMovedObservers();
 		}
 		catch (NoLocationInDirectionException e)
 		{
@@ -86,6 +66,7 @@ public class Player
 		{
    		Location newLocation = Application.instance().determineLocationWestOf(currentLocation);
 	   	currentLocation(newLocation);
+		informPlayerMovedObservers();
 		}
 		catch (NoLocationInDirectionException e)
 		{
@@ -110,7 +91,4 @@ public class Player
 	{
 		Application.instance().informPlayerMovedObservers();
 	} /* end informPlayerMovedObservers */
-
-   /** The player's current location */
-   private Location currentLocation = null;
 } /* end Player */

@@ -36,6 +36,7 @@ public class InitializeApplication extends Application
    	classroomLocation = new Location(
    			"This is a classroom. The lighting is terrible. It looks like a grey prison cell.",
    			"a classroom");
+   	
    } /* end createClassroomLocation */
 
    /**
