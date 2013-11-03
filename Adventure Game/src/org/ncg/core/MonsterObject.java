@@ -14,6 +14,14 @@ public class MonsterObject extends Entity {
 		this.description = description;
 	}
 	
+	public String name() {
+		return name;
+	}
+	
+	public String description() {
+		return description;
+	}
+	
 	private String name;
 	private String description;
 }

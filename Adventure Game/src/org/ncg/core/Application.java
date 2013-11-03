@@ -159,6 +159,13 @@ public abstract class Application
 		testList.add(testItem);
 		itemsInLocation.put(idForInitialLocation, testList);
 		
+		MonsterObject testMonster = new MonsterObject("UltraMax", "PlotPointGraphLine");
+		MonsterObject testMonsterTwo = new MonsterObject("Kitty", "Evil kitty");
+		ArrayList<MonsterObject> testMonsterList = new ArrayList<>();
+		testMonsterList.add(testMonster);
+		testMonsterList.add(testMonsterTwo);
+		monstersInLocation.put(idForInitialLocation, testMonsterList);
+		
 	} /* end loadLocationsFromFileNamed */
 
    /**
@@ -290,10 +297,23 @@ public abstract class Application
 		if(itemsInLocation.containsKey(location.id())) {
 			ArrayList<Item> items = itemsInLocation.get(location.id());
 			for(Item i : items) {
-				itemsInLoc += "You see a " + i.name() + ". ";
+				itemsInLoc += "You see a " + i.name() + ".";
 			}
 		}
 		return itemsInLoc;
+	}
+	
+	protected String listMonsterObjectsInLocation(Location location) {
+		String monstersInLoc = "";
+		
+		if(monstersInLocation.containsKey(location.id())) {
+			ArrayList<MonsterObject> monsters = monstersInLocation.get(location.id());
+			for(MonsterObject i : monsters) {
+				monstersInLoc += "There is a " + i.name() + ".";
+			}
+		}
+		
+		return monstersInLoc;
 	}
 	
 	/**
@@ -379,13 +399,43 @@ public abstract class Application
 	   itemsInApplication.add(item);
    }
    
+   /**
+    * Adds a monster to the list of MonsterObjects in the Application
+    * @param monster
+    */
+   protected void addMonster(MonsterObject monster) {
+	   monstersInApplication.add(monster);
+   }
+   
+   /**
+    * Saves Monsters to File
+    * @param fileName
+    */
+   protected void saveMonsterObjectsToFileNamed(String fileName) {
+	   saveObjectToFileNamed(monstersInApplication, fileName);
+   }
+   
+   protected void loadMonsterObjectsFromFileNamed(String fileName) {
+	   monstersInApplication = (ArrayList<MonsterObject>)loadObjectFromFileNamed(fileName);
+   }
+   
+   /**
+    * Saves Items to File
+    * @param fileName
+    */
    protected void saveItemsToFileNamed(String fileName) {
 	   saveObjectToFileNamed(itemsInApplication, fileName);
    }
    
+   /**
+    * Loads Items from File
+    * @param fileName
+    */
    protected void loadItemsFromFileNamed(String fileName) {
 	   itemsInApplication = (ArrayList<Item>)loadObjectFromFileNamed(fileName);
    }
+   
+   
    
    /**
     * Save the current locations database to a file with the specified file
@@ -437,11 +487,17 @@ public abstract class Application
    /** The list of all locations */
    private static AdventureGameHashMap<Location> locations = new AdventureGameHashMap<>(); 
 
-   /** List of Items running in the game */
+   /** List of all items in the game */
    private static ArrayList<Item> itemsInApplication = new ArrayList<Item>();
+   
+   /** List of all MonsterObjects in the game */
+   private static ArrayList<MonsterObject> monstersInApplication = new ArrayList<MonsterObject>();
    
    /** Hashmap of items in each location */
    private static HashMap<Integer, ArrayList<Item>> itemsInLocation = new HashMap<Integer, ArrayList<Item>>();
+   
+   /** Hashmap of MonsterObjects in each location */
+   private static HashMap<Integer, ArrayList<MonsterObject>> monstersInLocation = new HashMap<Integer, ArrayList<MonsterObject>>();
    
    /** The map of locations */
    private Map map = null;

@@ -30,7 +30,7 @@ public class TextView extends View
    {
    	Location currentLocation = Application.instance().playerCurrentLocation();
    	
-   	System.out.println(currentLocation.description() + " " + Application.instance().listItemsInLocation(currentLocation) + " " + Application.instance().determineDirectionsPlayerCanGo(currentLocation));
+   	System.out.println(currentLocation.description() + " " + Application.instance().listItemsInLocation(currentLocation) + " " + Application.instance().listMonsterObjectsInLocation(currentLocation) + " "+ Application.instance().determineDirectionsPlayerCanGo(currentLocation));
    } /* end look */
    
    
