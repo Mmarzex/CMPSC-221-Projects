@@ -416,7 +416,7 @@ public abstract class Application
    }
    
    protected void loadMonsterObjectsFromFileNamed(String fileName) {
-	   monstersInApplication = (ArrayList<MonsterObject>)loadObjectFromFileNamed(fileName);
+	   monstersInApplication = (AdventureGameHashMap<MonsterObject>)loadObjectFromFileNamed(fileName);
    }
    
    /**
@@ -432,7 +432,7 @@ public abstract class Application
     * @param fileName
     */
    protected void loadItemsFromFileNamed(String fileName) {
-	   itemsInApplication = (ArrayList<Item>)loadObjectFromFileNamed(fileName);
+	   itemsInApplication = (AdventureGameHashMap<Item>)loadObjectFromFileNamed(fileName);
    }
    
    
@@ -488,10 +488,12 @@ public abstract class Application
    private static AdventureGameHashMap<Location> locations = new AdventureGameHashMap<>(); 
 
    /** List of all items in the game */
-   private static ArrayList<Item> itemsInApplication = new ArrayList<Item>();
+   //private static ArrayList<Item> itemsInApplication = new ArrayList<Item>();
+   private static AdventureGameHashMap<Item> itemsInApplication = new AdventureGameHashMap<>();
    
    /** List of all MonsterObjects in the game */
-   private static ArrayList<MonsterObject> monstersInApplication = new ArrayList<MonsterObject>();
+   //private static ArrayList<MonsterObject> monstersInApplication = new ArrayList<MonsterObject>();
+   private static AdventureGameHashMap<MonsterObject> monstersInApplication = new AdventureGameHashMap<>();
    
    /** Hashmap of items in each location */
    private static HashMap<Integer, ArrayList<Item>> itemsInLocation = new HashMap<Integer, ArrayList<Item>>();
