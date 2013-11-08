@@ -297,7 +297,7 @@ public abstract class Application
 		if(itemsInLocation.containsKey(location.id())) {
 			ArrayList<Item> items = itemsInLocation.get(location.id());
 			for(Item i : items) {
-				itemsInLoc += "You see a " + i.name() + ".";
+				itemsInLoc += " You see a " + i.name() + ".";
 			}
 		}
 		return itemsInLoc;
@@ -309,7 +309,7 @@ public abstract class Application
 		if(monstersInLocation.containsKey(location.id())) {
 			ArrayList<MonsterObject> monsters = monstersInLocation.get(location.id());
 			for(MonsterObject i : monsters) {
-				monstersInLoc += "There is a " + i.name() + ".";
+				monstersInLoc += " There is a " + i.name() + ".";
 			}
 		}
 		
@@ -434,8 +434,6 @@ public abstract class Application
    protected void loadItemsFromFileNamed(String fileName) {
 	   itemsInApplication = (AdventureGameHashMap<Item>)loadObjectFromFileNamed(fileName);
    }
-   
-   
    
    /**
     * Save the current locations database to a file with the specified file

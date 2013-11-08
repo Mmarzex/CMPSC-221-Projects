@@ -5,22 +5,41 @@
  */
 public class Player extends Entity
 {
+	/**
+	 * Moves the player in the specified direction
+	 * @param direction - The direction to move
+	 */
+	protected void move(String direction) {
+		
+		try
+		{
+			Location newLocation = null;
+			if(direction == "east")
+				newLocation = Application.instance().determineLocationEastOf(currentLocation);
+			else if(direction == "west")
+				newLocation = Application.instance().determineLocationWestOf(currentLocation);
+			else if(direction == "north")
+				newLocation = Application.instance().determineLocationNorthOf(currentLocation);
+			else if(direction == "south")
+				newLocation = Application.instance().determineLocationSouthOf(currentLocation);
+			else 
+				informInvalidGoDirectionObservers(direction);
+			currentLocation(newLocation);
+			informPlayerMovedObservers();
+		}
+		catch (NoLocationInDirectionException e)
+		{
+			informInvalidGoDirectionObservers(direction);
+		} /* end try */
+	
+	}
 	
 	/**
 	 * Attempt to move the player to the east from their current location
 	 */
 	protected void goEast()
 	{
-		try
-		{
-   		Location newLocation = Application.instance().determineLocationEastOf(currentLocation);
-	   	currentLocation(newLocation);
-		informPlayerMovedObservers();
-		}
-		catch (NoLocationInDirectionException e)
-		{
-			informInvalidGoDirectionObservers("east");
-		} /* end try */
+		move("east");
 	} /* end goEast */
 	
 	/**
@@ -28,16 +47,7 @@ public class Player extends Entity
 	 */
 	protected void goNorth()
 	{
-		try
-		{
-   		Location newLocation = Application.instance().determineLocationNorthOf(currentLocation);
-	   	currentLocation(newLocation);
-		informPlayerMovedObservers();
-		}
-		catch (NoLocationInDirectionException e)
-		{
-			informInvalidGoDirectionObservers("north");
-		} /* end try */
+		move("north");
 	} /* end goNorth */
 	
 	/**
@@ -45,16 +55,7 @@ public class Player extends Entity
 	 */
 	protected void goSouth()
 	{
-		try
-		{
-   		Location newLocation = Application.instance().determineLocationSouthOf(currentLocation);
-	   	currentLocation(newLocation);
-		informPlayerMovedObservers();
-		}
-		catch (NoLocationInDirectionException e)
-		{
-			informInvalidGoDirectionObservers("south");
-		} /* end try */
+		move("south");
 	} /* end goSouth */
 	
 	/**
@@ -62,16 +63,7 @@ public class Player extends Entity
 	 */
 	protected void goWest()
 	{
-		try
-		{
-   		Location newLocation = Application.instance().determineLocationWestOf(currentLocation);
-	   	currentLocation(newLocation);
-		informPlayerMovedObservers();
-		}
-		catch (NoLocationInDirectionException e)
-		{
-			informInvalidGoDirectionObservers("west");
-		} /* end try */
+		move("west");
 	} /* end goWest */
 
 	/**
