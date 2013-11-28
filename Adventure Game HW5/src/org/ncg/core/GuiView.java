@@ -11,7 +11,7 @@ public class GuiView extends View {
 	@Override
 	public void informInvalidGoDirection(String direction) {
 		// TODO Auto-generated method stub
-		
+		mainWindow.textArea.setText("You hit your nose on the wall trying to go " + direction);
 	}
 
 	@Override
@@ -24,10 +24,11 @@ public class GuiView extends View {
 	public void look() {
 		// TODO Auto-generated method stub
 	   	Location currentLocation = Application.instance().playerCurrentLocation();
-	   	mainWindow.textArea.setText(currentLocation.description() +
-   			             getItemsDescription(currentLocation) +
-   			             getMobsDescription(currentLocation) +
-   			             getCanMoveDirectionsDescription(currentLocation));
+	   	String areaText = currentLocation.description() + System.lineSeparator() +
+		             getItemsDescription(currentLocation) + System.lineSeparator() +
+		             getMobsDescription(currentLocation) + System.lineSeparator() +
+		             getCanMoveDirectionsDescription(currentLocation);
+	   	mainWindow.textArea.setText(areaText);
 	}
 
 }
