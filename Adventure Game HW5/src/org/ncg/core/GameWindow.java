@@ -11,14 +11,14 @@ import javax.swing.JButton;
 import javax.swing.JScrollPane;
 
 public class GameWindow extends JFrame {
-	JTextArea textArea;
+	private JTextArea textArea;
 	public GameWindow() {
 		setSize(640, 480);
 		setTitle("Nittany Cubs Gaming GUI");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
-		JButton btnNewButton = new JButton("Go west");
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton westButton = new JButton("Go west");
+		westButton.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -26,10 +26,10 @@ public class GameWindow extends JFrame {
 				Application.instance().movePlayerWest();
 			}
 		});
-		getContentPane().add(btnNewButton, BorderLayout.WEST);
+		getContentPane().add(westButton, BorderLayout.WEST);
 		
-		JButton btnNewButton_1 = new JButton("Go north");
-		btnNewButton_1.addActionListener(new ActionListener() {
+		JButton northButton = new JButton("Go north");
+		northButton.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -37,10 +37,10 @@ public class GameWindow extends JFrame {
 				Application.instance().movePlayerNorth();
 			}
 		});
-		getContentPane().add(btnNewButton_1, BorderLayout.NORTH);
+		getContentPane().add(northButton, BorderLayout.NORTH);
 		
-		JButton btnNewButton_2 = new JButton("Go east");
-		btnNewButton_2.addActionListener(new ActionListener() {
+		JButton eastButton = new JButton("Go east");
+		eastButton.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -49,10 +49,10 @@ public class GameWindow extends JFrame {
 				
 			}
 		});
-		getContentPane().add(btnNewButton_2, BorderLayout.EAST);
+		getContentPane().add(eastButton, BorderLayout.EAST);
 		
-		JButton btnNewButton_3 = new JButton("Go south");
-		btnNewButton_3.addActionListener(new ActionListener() {
+		JButton southButton = new JButton("Go south");
+		southButton.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -60,7 +60,7 @@ public class GameWindow extends JFrame {
 				Application.instance().movePlayerSouth();
 			}
 		});
-		getContentPane().add(btnNewButton_3, BorderLayout.SOUTH);
+		getContentPane().add(southButton, BorderLayout.SOUTH);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		getContentPane().add(scrollPane, BorderLayout.CENTER);
@@ -68,6 +68,10 @@ public class GameWindow extends JFrame {
 		textArea = new JTextArea();
 		textArea.setEditable(false);
 		scrollPane.setViewportView(textArea);
+	}
+	
+	public JTextArea textArea() {
+		return textArea;
 	}
 
 }
