@@ -12,18 +12,24 @@ import javax.swing.JTextArea;
 public class GuiView extends View {
 	private JFrame mainWindow;
 	private JTextArea textArea;
+	
+	/**
+	 * initializes the window and then sets it to be visible
+	 */
 	public GuiView() {
 		
-		//mainWindow = new GameWindow();
 		initialize();
 		mainWindow.setVisible(true);
 	}
-	
+
+	/**
+	 *  Initializes the window and adds all event listeners to the buttons
+	 */
 	private void initialize() {
 		mainWindow = new JFrame();
 		mainWindow.setSize(640, 480);
 		mainWindow.setTitle("Nittany Cubs Gaming GUI");
-		mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE );
 		
 		JButton westButton = new JButton("Go west");
 		westButton.addActionListener(new ActionListener() {
